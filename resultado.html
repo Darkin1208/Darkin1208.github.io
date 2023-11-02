@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - MegaProva</title>
+    <link rel="stylesheet" href="css/default.css">
+    <style>
+        @font-face {
+            font-family: 'BalsamiqSansBold';
+            src: url('Fontes/BalsamiqSansBold.ttf') format('truetype');
+        }
+
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="questoes.html">Fazer novamente</a></li>
+        </ul>
+    </header>
+    <div class="centered-text">
+        <h1>Resultado do Quiz</h1>
+        <div id="result-info">
+            <p id="acertos">Acertos: </p>
+            <p id="total-questoes">Total de questões: </p>
+            <p id="porcentagem-acerto">Porcentagem de acerto: </p>
+            <p id="resultado">Resultado: </p>
+        </div>
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function getUrlParams() {
+            const params = new URLSearchParams(location.search);
+            return {
+                correct: params.get("correct"),
+                total: params.get("total"),
+                percentage: params.get("percentage")
+            };
+        }
+
+        // Função para calcular o resultado com base na porcentagem
+        function calcularResultado(percentage) {
+            if (percentage >= 50) {
+                return "Satisfatório";
+            } else {
+                return "Ruim";
+            }
+        }
+
+        // Obter os parâmetros da URL
+        const params = getUrlParams();
+
+        // Atualizar os elementos HTML com os valores dos parâmetros
+        const acertos = document.getElementById("acertos");
+        acertos.textContent += params.correct;
+
+        const totalQuestoes = document.getElementById("total-questoes");
+        totalQuestoes.textContent += params.total;
+
+        const porcentagemAcerto = document.getElementById("porcentagem-acerto");
+        porcentagemAcerto.textContent += params.percentage + "%";
+
+        const resultado = document.getElementById("resultado");
+        resultado.textContent += calcularResultado(parseFloat(params.percentage));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - MegaProva</title>
+    <link rel="stylesheet" href="css/default.css">
+    <style>
+        @font-face {
+            font-family: 'BalsamiqSansBold';
+            src: url('Fontes/BalsamiqSansBold.ttf') format('truetype');
+        }
+        h1 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 60px;
+        }
+        .start-button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 100px;
+        }
+        .button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 100px;
+            margin-left: 550px auto;
+        }
+        .button2 {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 100px;
+            margin-top: 30px;
+        }
+        .button2:hover {
+            background-color: rgba(147, 17, 0, 0.637);
+        }
+        .button:hover {
+            background-color: rgba(147, 17, 0, 0.637);
+        }
+        .result-correct {
+            color: rgb(110, 223, 110);
+        }
+        .result-incorrect {
+            color: #f16262d2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </header>
+    <div id="selection-container">
+        <h1>Selecione a Matéria e a "Faculdade"</h1>
+        <label for="faculty" class="start-button">"Faculdade":</label>
+        <select id="faculty">
+            <option value="Unesp">Unesp</option>
+            <option value="Enem">Enem</option>
+            <option value="Fuvest">Fuvest</option>
+            <!-- Adicione mais opções de faculdade aqui -->
+        </select>
+
+        <label for="subject" class="start-button">Matéria:</label>
+        <select id="subject">
+            <option value="Portugues">Português</option>
+            <option value="Quimica">Química</option>
+            <option value="Filosofia">Filosofia</option>
+            <option value="Ingles">Inglês</option>
+            <!-- Adicione mais opções de matéria aqui -->
+        </select>
+
+        <button id="start-button" class="button">Começar o Quiz</button>
+    </div>
+
+    <div id="quiz-container" style="display: none;">
+        <h1>Questão 1</h1>
+        <img src="enem/portugues/1.png" alt="Questão 1">
+        <div id="alternatives">
+            <label>
+                <input type="radio" name="alternative" value="A"> A
+            </label>
+            <label>
+                <input type="radio" name="alternative" value="B"> B
+            </label>
+            <label>
+                <input type="radio" name="alternative" value="C"> C
+            </label>
+            <label>
+                <input type="radio" name="alternative" value="D"> D
+            </label>
+            <label>
+                <input type="radio" name="alternative" value="E"> E
+            </label>
+        </div>
+        <button id="submit-button" class="button2">Verificar Resposta</button>
+        <p id="result"></p>
+        <div id="explanation-section" style="display: none;">
+            <p id="explanation" class="hidden"></p>
+            <img id="explanation-image" class="hidden" src="" alt="Explicação">
+        </div>
+        <button id="next-button" class="button2">Próxima Questão</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                image: "enem/portugues/1.png",
+                answer: "A",
+                explanation: "enem/portugues/res/1.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/filosofia/1.png",
+                answer: "E",
+                explanation: "enem/filosofia/res/1.png",
+                faculty: "Enem",
+                subject: "Filosofia"
+            },
+            {
+                image: "enem/ingles/1.png",
+                answer: "D",
+                explanation: "enem/ingles/res/1.png",
+                faculty: "Enem",
+                subject: "Ingles"
+            },
+            {
+                image: "enem/ingles/2.png",
+                answer: "E",
+                explanation: "enem/ingles/res/2.png",
+                faculty: "Enem",
+                subject: "Ingles"
+            },
+            {
+                image: "enem/ingles/3.png",
+                answer: "C",
+                explanation: "enem/ingles/res/3.png",
+                faculty: "Enem",
+                subject: "Ingles"
+            },
+            {
+                image: "enem/ingles/4.png",
+                answer: "D",
+                explanation: "enem/ingles/res/4.png",
+                faculty: "Enem",
+                subject: "Ingles"
+            },
+            {
+                image: "enem/filosofia/2.png",
+                answer: "C",
+                explanation: "enem/filosofia/res/2.png",
+                faculty: "Enem",
+                subject: "Filosofia"
+            }
+            // Adicione mais questões aqui
+        ];
+
+        const selectionContainer = document.getElementById("selection-container");
+        const quizContainer = document.getElementById("quiz-container");
+        const facultySelect = document.getElementById("faculty");
+        const subjectSelect = document.getElementById("subject");
+        const startButton = document.getElementById("start-button");
+        const alternatives = document.getElementById("alternatives");
+        const submitButton = document.getElementById("submit-button");
+        const result = document.getElementById("result");
+        const explanation = document.getElementById("explanation");
+        const nextButton = document.getElementById("next-button");
+        const explanationSection = document.getElementById("explanation-section");
+        let questionAnswered = false;
+        let correctAnswersCount = 0;
+
+        startButton.addEventListener("click", () => {
+            const selectedFaculty = facultySelect.value;
+            const selectedSubject = subjectSelect.value;
+
+            // Filtrar as questões com base nas seleções do usuário
+            const filteredQuestions = questions.filter(question => {
+                return question.faculty === selectedFaculty && question.subject === selectedSubject;
+            });
+
+            if (filteredQuestions.length > 0) {
+                // Embaralhar as questões filtradas
+                const shuffledQuestions = shuffleArray(filteredQuestions);
+
+                let currentQuestionIndex = 0;
+
+                // Ocultar a tela de seleção e exibir o quiz
+                selectionContainer.style.display = "none";
+                quizContainer.style.display = "block";
+
+                // Função para exibir a próxima questão
+                function nextQuestion() {
+                    if (questionAnswered) {
+                        currentQuestionIndex++;
+                        result.textContent = "";
+                        explanation.textContent = "";
+                        explanation.classList.add("hidden");
+                        if (currentQuestionIndex < shuffledQuestions.length) {
+                            displayQuestion(currentQuestionIndex);
+                            questionAnswered = false;
+                        } else {
+                            explanation.textContent = "As questões acabaram!";
+                            showResultSummary();
+                        }
+                    }
+                }
+
+                submitButton.addEventListener("click", () => {
+                    if (!questionAnswered) {
+                        checkAnswer();
+                        questionAnswered = true;
+                    }
+                });
+                nextButton.addEventListener("click", nextQuestion);
+
+                // Função para embaralhar um array (já definida no seu código original)
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+
+                // Função para exibir uma questão
+                function displayQuestion(index) {
+                    const question = shuffledQuestions[index];
+                    quizContainer.querySelector("h1").textContent = `Questão ${index + 1}`;
+                    quizContainer.querySelector("img").src = question.image;
+
+                    // Limpando a seleção das alternativas
+                    const alternativesInputs = alternatives.querySelectorAll("input[type=radio]");
+                    alternativesInputs.forEach(input => {
+                    input.checked = false;
+                });
+
+                    // Ocultar a explicação
+                    explanationSection.style.display = "none";
+                }
+
+                // Função para verificar a resposta
+                function checkAnswer() {
+                    const selectedAlternative = document.querySelector('input[name="alternative"]:checked');
+                    if (!selectedAlternative) {
+                        result.textContent = "Selecione uma alternativa.";
+                        return;
+                    }
+                    if (selectedAlternative.value === shuffledQuestions[currentQuestionIndex].answer) {
+                        result.textContent = "Resposta Correta!";
+                        result.classList.remove("result-incorrect");
+                        result.classList.add("result-correct");
+                        correctAnswersCount++;
+                    } else {
+                        result.textContent = "Resposta Incorreta.";
+                        result.classList.remove("result-correct");
+                        result.classList.add("result-incorrect");
+                    }
+
+                    const explanationSection = document.getElementById("explanation-section");
+                    explanationSection.style.display = "block";
+                    const explanation = document.getElementById("explanation");
+                    explanation.textContent = "Explicação:";
+                    const explanationImg = document.getElementById("explanation-image");
+                    explanationImg.src = shuffledQuestions[currentQuestionIndex].explanation;
+                    explanationImg.style.display = "block";
+                }
+
+                // Função para mostrar o resumo do resultado
+                function showResultSummary() {
+                    // Calcular a porcentagem de respostas corretas
+                    const percentage = (correctAnswersCount / shuffledQuestions.length) * 100;
+
+                    // Redirecionar para a página de resultado com os parâmetros de resultado
+                    window.location.href = `resultado.html?correct=${correctAnswersCount}&total=${shuffledQuestions.length}&percentage=${percentage.toFixed(2)}`;
+                }
+
+                // Inicialização
+                displayQuestion(currentQuestionIndex);
+            } else {
+                alert("Não há questões disponíveis para a seleção feita. Selecione outras opções.");
+            }
+        });
+    </script>
+</body>
+</html>

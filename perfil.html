@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário - MegaProva</title>
+    <link rel="stylesheet" href="css/default.css">
+    <style>
+        /* Adicione estilos de aparência conforme necessário */
+        .centered-text {
+            text-align: center;
+            margin-top: 100px;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </header>
+    <div class="centered-text">
+        <h1>Perfil do Usuário</h1>
+        <p>Bem-vindo ao seu perfil, <span id="username"></span>!</p>
+        <p>Aqui estão suas informações de perfil:</p>
+        <ul>
+            <li><strong>Nome de Usuário:</strong> <span id="user-username"></span></li>
+            <li><strong>E-mail:</strong> <span id="user-email"></span></li>
+            <!-- Adicione mais informações de perfil aqui -->
+        </ul>
+    </div>
+    <script>
+        // Suponhamos que você tenha obtido as informações do perfil do usuário em JavaScript, assim:
+        const userProfile = {
+            username: "Você consegue!",
+            email: "Você é foda!"
+        };
+
+        // Preencha as informações do perfil no HTML
+        document.getElementById("username").textContent = userProfile.username;
+        document.getElementById("user-username").textContent = userProfile.username;
+        document.getElementById("user-email").textContent = userProfile.email;
+    </script>
+</body>
+</html>

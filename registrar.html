@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaProva - Registro</title>
+    <link rel="stylesheet" href="css/default.css">
+    <style>
+        @font-face {
+            font-family: 'BalsamiqSansBold';
+            src: url('Fontes/BalsamiqSansBold.ttf') format('truetype');
+        }
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+        }
+        body {
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 100px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            justify-content: center;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            text-align: left;
+            width: 100%;
+            background-color: #1c1c1c;
+            color: #fff;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centralize o botão horizontalmente */
+            margin-left: 20px
+        }
+        .button {
+            background-color: #ff0000;
+            color: #FFFFFF;
+            padding: 20px 110px;
+            border: none;
+            border-radius: 4px;
+            margin: 20px;
+            cursor: pointer;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+        }
+        .button:hover {
+            background-color: rgba(147, 17, 0, 0.637);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </header>
+    <h1 class="centered-text">Registro</h1>
+    <form id="registration-form">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+
+        <div class="button-container">
+            <button type="submit" class="button">Registrar</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("registration-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var user = {
+                username: username,
+                email: email,
+                password: password
+            };
+
+            var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+            existingUsers.push(user);
+
+            localStorage.setItem("users", JSON.stringify(existingUsers));
+
+            alert("Registro concluído com sucesso!");
+
+            document.getElementById("username").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+        });
+    </script>
+</body>
+</html>

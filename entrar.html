@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaProva - Login</title>
+    <link rel="stylesheet" href="css/default.css">
+    <style>
+        @font-face {
+            font-family: 'BalsamiqSansBold';
+            src: url('Fontes/BalsamiqSansBold.ttf') format('truetype');
+        }
+        .centered-text {
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+        }
+        body {
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 100px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            justify-content: center;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            text-align: left;
+            width: 100%;
+            background-color: #1c1c1c;
+            color: #fff;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centralize o botão horizontalmente */
+            margin-left: 20px
+        }
+        .button {
+            background-color: #ff0000;
+            color: #FFFFFF;
+            padding: 20px 110px;
+            border: none;
+            border-radius: 4px;
+            margin: 20px;
+            cursor: pointer;
+            font-family: 'BalsamiqSansBold', Arial, sans-serif;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: rgba(147, 17, 0, 0.637);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </header>
+    <h1 class="centered-text">Entrar</h1>
+    <form id="login-form">
+        <label for="username">Nome de Usuário:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+        <div class="button-container">
+            <button type="submit" class="button">Entrar</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+            var loggedInUser = existingUsers.find(function (user) {
+                return user.username === username && user.password === password;
+            });
+
+            if (loggedInUser) {
+                alert("Login bem-sucedido! Bem-vindo, " + username + "!");
+            } else {
+                alert("Credenciais incorretas. Tente novamente.");
+            }
+
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        });
+    </script>
+</body>
+</html>
