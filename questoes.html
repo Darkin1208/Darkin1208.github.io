@@ -7,12 +7,19 @@
     <title>Quiz - MegaProva</title>
     <link rel="stylesheet" href="css/default.css">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
         @font-face {
             font-family: 'BalsamiqSansBold';
             src: url('Fontes/BalsamiqSansBold.ttf') format('truetype');
         }
         h1 {
-            margin-top: 40px;
             margin-bottom: 40px;
             text-align: center;
         }
@@ -33,22 +40,23 @@
             cursor: pointer;
             font-size: 16px;
             margin-bottom: 100px;
+            margin: 10px auto;
+            text-align: center;
         }
         .button {
             background-color: #ff0000;
             color: #fff;
-            padding: 10px 20px;
+            padding: 30px 100px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-bottom: 100px;
-            margin-left: 550px auto;
+            margin: 10px auto;
         }
         .button2 {
             background-color: #ff0000;
             color: #fff;
-            padding: 10px 20px;
+            padding: 30px 100px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -56,10 +64,7 @@
             margin-bottom: 100px;
             margin-top: 30px;
         }
-        .button2:hover {
-            background-color: rgba(147, 17, 0, 0.637);
-        }
-        .button:hover {
+        .button2:hover, .button:hover {
             background-color: rgba(147, 17, 0, 0.637);
         }
         .result-correct {
@@ -67,6 +72,26 @@
         }
         .result-incorrect {
             color: #f16262d2;
+        }
+        #quiz-container {
+            text-align: center;
+            margin-top: 500px;
+        }
+        #quiz-container .question-container {
+            max-height: 70vh; /* Defina a altura máxima para o contêiner da imagem */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #selection-container {
+            text-align: center;
+        }
+        .explanation-image {
+            max-width: 100%; /* Defina a largura máxima desejada para a imagem */
+            display: block;
+            margin: 0 auto;
+            max-height: 70vh; /* Defina a altura máxima para a imagem, se desejar */
         }
     </style>
 </head>
@@ -92,15 +117,19 @@
             <option value="Quimica">Química</option>
             <option value="Filosofia">Filosofia</option>
             <option value="Ingles">Inglês</option>
+            <option value="Literatura">Literatura</option>
             <!-- Adicione mais opções de matéria aqui -->
         </select>
 
-        <button id="start-button" class="button">Começar o Quiz</button>
+        <button id="start-button" class="button">Começar</button>
     </div>
 
     <div id="quiz-container" style="display: none;">
-        <h1>Questão 1</h1>
-        <img src="enem/portugues/1.png" alt="Questão 1">
+        <div class="question-header">
+            <h1>Questão 1</h1>
+            <div class="question-container">
+                <img src="enem/portugues/1.png" alt="Questão 1">
+            </div>
         <div id="alternatives">
             <label>
                 <input type="radio" name="alternative" value="A"> A
@@ -122,7 +151,7 @@
         <p id="result"></p>
         <div id="explanation-section" style="display: none;">
             <p id="explanation" class="hidden"></p>
-            <img id="explanation-image" class="hidden" src="" alt="Explicação">
+            <img id="explanation-image" class="hidden, explanation-image" src="" alt="Explicação">
         </div>
         <button id="next-button" class="button2">Próxima Questão</button>
     </div>
@@ -172,6 +201,83 @@
                 subject: "Ingles"
             },
             {
+                image: "enem/ingles/5.png",
+                answer: "B",
+                explanation: "enem/ingles/res/5.png",
+                faculty: "Enem",
+                subject: "Ingles"
+            },
+            {
+                image: "enem/portugues/2.png",
+                answer: "D",
+                explanation: "enem/portugues/res/2.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/portugues/3.png",
+                answer: "D",
+                explanation: "enem/portugues/res/3.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/portugues/4.png",
+                answer: "C",
+                explanation: "enem/portugues/res/4.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/portugues/5.png",
+                answer: "A",
+                explanation: "enem/portugues/res/5.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/portugues/6.png",
+                answer: "B",
+                explanation: "enem/portugues/res/6.png",
+                faculty: "Enem",
+                subject: "Portugues"
+            },
+            {
+                image: "enem/literatura/1.png",
+                answer: "B",
+                explanation: "enem/literatura/res/1.png",
+                faculty: "Enem",
+                subject: "Literatura"
+            },
+            {
+                image: "enem/literatura/2.png",
+                answer: "E",
+                explanation: "enem/literatura/res/2.png",
+                faculty: "Enem",
+                subject: "Literatura"
+            },
+            {
+                image: "enem/literatura/3.png",
+                answer: "D",
+                explanation: "enem/literatura/res/3.png",
+                faculty: "Enem",
+                subject: "Literatura"
+            },
+            {
+                image: "enem/quimica/1.png",
+                answer: "C",
+                explanation: "enem/quimica/res/1.png",
+                faculty: "Enem",
+                subject: "Quimica"
+            },
+            {
+                image: "enem/quimica/2.png",
+                answer: "B",
+                explanation: "enem/quimica/res/2.png",
+                faculty: "Enem",
+                subject: "Quimica"
+            },
+            {
                 image: "enem/filosofia/2.png",
                 answer: "C",
                 explanation: "enem/filosofia/res/2.png",
@@ -199,22 +305,18 @@
             const selectedFaculty = facultySelect.value;
             const selectedSubject = subjectSelect.value;
 
-            // Filtrar as questões com base nas seleções do usuário
             const filteredQuestions = questions.filter(question => {
                 return question.faculty === selectedFaculty && question.subject === selectedSubject;
             });
 
             if (filteredQuestions.length > 0) {
-                // Embaralhar as questões filtradas
                 const shuffledQuestions = shuffleArray(filteredQuestions);
 
                 let currentQuestionIndex = 0;
 
-                // Ocultar a tela de seleção e exibir o quiz
                 selectionContainer.style.display = "none";
                 quizContainer.style.display = "block";
 
-                // Função para exibir a próxima questão
                 function nextQuestion() {
                     if (questionAnswered) {
                         currentQuestionIndex++;
@@ -224,6 +326,7 @@
                         if (currentQuestionIndex < shuffledQuestions.length) {
                             displayQuestion(currentQuestionIndex);
                             questionAnswered = false;
+                            resetAlternatives(); // Adicione a função para redefinir as alternativas
                         } else {
                             explanation.textContent = "As questões acabaram!";
                             showResultSummary();
@@ -239,7 +342,6 @@
                 });
                 nextButton.addEventListener("click", nextQuestion);
 
-                // Função para embaralhar um array (já definida no seu código original)
                 function shuffleArray(array) {
                     for (let i = array.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
@@ -248,28 +350,26 @@
                     return array;
                 }
 
-                // Função para exibir uma questão
                 function displayQuestion(index) {
                     const question = shuffledQuestions[index];
                     quizContainer.querySelector("h1").textContent = `Questão ${index + 1}`;
                     quizContainer.querySelector("img").src = question.image;
 
-                    // Limpando a seleção das alternativas
                     const alternativesInputs = alternatives.querySelectorAll("input[type=radio]");
                     alternativesInputs.forEach(input => {
-                    input.checked = false;
-                });
+                        input.checked = false;
+                        input.disabled = false; // Habilita todas as alternativas
+                    });
 
-                    // Ocultar a explicação
                     explanationSection.style.display = "none";
                 }
 
-                // Função para verificar a resposta
                 function checkAnswer() {
-                    const selectedAlternative = document.querySelector('input[name="alternative"]:checked');
-                    if (!selectedAlternative) {
-                        result.textContent = "Selecione uma alternativa.";
-                        return;
+                const selectedAlternative = document.querySelector('input[name="alternative"]:checked');
+                if (!selectedAlternative) {
+                result.textContent = "Selecione uma alternativa.";
+                enableAlternatives(); // Reabilita as alternativas
+                return;
                     }
                     if (selectedAlternative.value === shuffledQuestions[currentQuestionIndex].answer) {
                         result.textContent = "Resposta Correta!";
@@ -291,16 +391,12 @@
                     explanationImg.style.display = "block";
                 }
 
-                // Função para mostrar o resumo do resultado
                 function showResultSummary() {
-                    // Calcular a porcentagem de respostas corretas
                     const percentage = (correctAnswersCount / shuffledQuestions.length) * 100;
 
-                    // Redirecionar para a página de resultado com os parâmetros de resultado
                     window.location.href = `resultado.html?correct=${correctAnswersCount}&total=${shuffledQuestions.length}&percentage=${percentage.toFixed(2)}`;
                 }
 
-                // Inicialização
                 displayQuestion(currentQuestionIndex);
             } else {
                 alert("Não há questões disponíveis para a seleção feita. Selecione outras opções.");
