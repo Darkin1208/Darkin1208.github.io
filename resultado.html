@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado - MegaProva</title>
+    <title>Resultado</title>
     <link rel="stylesheet" href="css/default.css">
     <style>
         @font-face {
@@ -27,7 +27,7 @@
         </ul>
     </header>
     <div class="centered-text">
-        <h1>Resultado do Quiz</h1>
+        <h1>Resultado</h1>
         <div id="result-info">
             <p id="acertos">Acertos: </p>
             <p id="total-questoes">Total de questões: </p>
@@ -37,7 +37,6 @@
     </div>
 
     <script>
-        // Função para obter os parâmetros da URL
         function getUrlParams() {
             const params = new URLSearchParams(location.search);
             return {
@@ -47,7 +46,6 @@
             };
         }
 
-        // Função para calcular o resultado com base na porcentagem
         function calcularResultado(percentage) {
             if (percentage >= 50) {
                 return "Satisfatório";
@@ -56,10 +54,8 @@
             }
         }
 
-        // Obter os parâmetros da URL
         const params = getUrlParams();
 
-        // Atualizar os elementos HTML com os valores dos parâmetros
         const acertos = document.getElementById("acertos");
         acertos.textContent += params.correct;
 
