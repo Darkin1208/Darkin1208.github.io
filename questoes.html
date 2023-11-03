@@ -84,7 +84,7 @@
             margin-top: 500px;
         }
         #quiz-container .question-container {
-            max-height: 70vh; /* Defina a altura máxima para o contêiner da imagem */
+            max-height: 70vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -101,10 +101,10 @@
             text-align: center;
         }
         .explanation-image {
-            max-width: 100%; /* Defina a largura máxima desejada para a imagem */
+            max-width: 100%;
             display: block;
             margin: 0 auto;
-            max-height: 70vh; /* Defina a altura máxima para a imagem, se desejar */
+            max-height: 70vh;
         }
         .question-image-container img {
             max-width: 100%;
@@ -131,9 +131,7 @@
         <label for="faculty" class="start-button">"Faculdade":</label>
         <select id="faculty">
             <option value="Enem">Enem</option>
-            <option value="Unesp">Unesp</option>
             <option value="Fuvest">Fuvest</option>
-            <!-- Adicione mais opções de faculdade aqui -->
         </select>
 
         <label for="subject" class="start-button">Matéria:</label>
@@ -148,7 +146,6 @@
             <option value="Matematica">Matemática</option>
             <option value="Geografia">Geografia</option>
             <option value="Historia">História</option>
-            <!-- Adicione mais opções de matéria aqui -->
         </select>
 
         <button id="start-button" class="button">Começar</button>
@@ -923,7 +920,7 @@
                         if (currentQuestionIndex < shuffledQuestions.length) {
                             displayQuestion(currentQuestionIndex);
                             questionAnswered = false;
-                            resetAlternatives(); // Adicione a função para redefinir as alternativas
+                            resetAlternatives();
                         } else {
                             explanation.textContent = "As questões acabaram!";
                             showResultSummary();
@@ -955,7 +952,7 @@
                     const alternativesInputs = alternatives.querySelectorAll("input[type=radio]");
                     alternativesInputs.forEach(input => {
                         input.checked = false;
-                        input.disabled = false; // Habilita todas as alternativas
+                        input.disabled = false;
                     });
 
                     explanationSection.style.display = "none";
@@ -965,7 +962,7 @@
                 const selectedAlternative = document.querySelector('input[name="alternative"]:checked');
                 if (!selectedAlternative) {
                 result.textContent = "Selecione uma alternativa.";
-                enableAlternatives(); // Reabilita as alternativas
+                enableAlternatives();
                 return;
                     }
                     if (selectedAlternative.value === shuffledQuestions[currentQuestionIndex].answer) {
